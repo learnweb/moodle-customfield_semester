@@ -147,6 +147,11 @@ class data_controller extends \core_customfield\data_controller {
         }
     }
 
+    /**
+     * returns a semesterid, given a datetime.
+     * @param DateTime $datetime the datetime
+     * @return int the corresponding semesterid
+     */
     public static function get_semester_for_datetime(DateTime $datetime): int {
         $year = (int) $datetime->format('Y');
         $month = (int) $datetime->format('m');
