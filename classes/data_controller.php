@@ -68,7 +68,7 @@ class data_controller extends \core_customfield\data_controller {
     public function instance_form_definition(\MoodleQuickForm $mform) {
         $field = $this->get_field();
         $formattedoptions = array(
-                0 => get_string('semesterindependent', 'customfield_semester')
+                1 => get_string('semesterindependent', 'customfield_semester')
         );
         $showmonthsintofuture = $this->get_field()->get_configdata_property('showmonthsintofuture');
         $endtime = new DateTime("+$showmonthsintofuture months");
@@ -132,7 +132,7 @@ class data_controller extends \core_customfield\data_controller {
      * @return string|null The human readable semester name
      */
     public static function get_name_for_semester(int $value) {
-        if ($value === 0) {
+        if ($value === 1) {
             return get_string('semesterindependent', 'customfield_semester');
         } else if ($value == null) {
             return null;
