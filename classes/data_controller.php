@@ -73,7 +73,7 @@ class data_controller extends \core_customfield\data_controller {
         $showmonthsintofuture = $this->get_field()->get_configdata_property('showmonthsintofuture');
         $endtime = new DateTime("+$showmonthsintofuture months");
         $endkey = self::get_semester_for_datetime($endtime);
-        $endyear = $endkey / 10;
+        $endyear = intdiv($endkey, 10);
         $endsemester = $endkey % 10;
 
         $beginofsemesters = $this->get_field()->get_configdata_property('beginofsemesters');
@@ -139,7 +139,7 @@ class data_controller extends \core_customfield\data_controller {
         } else if ($value == null) {
             return null;
         } else {
-            $year = $value / 10;
+            $year = intdiv($value, 10);
             $semester = $value % 10;
             if ($semester === 0) {
                 return get_string('summersemester', 'customfield_semester') . ' ' . $year;
