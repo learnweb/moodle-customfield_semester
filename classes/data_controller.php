@@ -77,15 +77,17 @@ class data_controller extends \core_customfield\data_controller {
         $endsemester = $endkey % 10;
 
         $beginofsemesters = $this->get_field()->get_configdata_property('beginofsemesters');
+        $summersemesterstring  = get_string('summersemester', 'customfield_semester');
+        $wintersemesterstring  = get_string('wintersemester', 'customfield_semester');
         for ($year = $beginofsemesters; $year <= $endyear; $year++) {
-            $formattedoptions[$year * 10] = get_string('summersemester', 'customfield_semester') . ' ' . $year;
+            $formattedoptions[$year * 10] = $summersemesterstring . ' ' . $year;
 
             if ($year == $endyear && $endsemester == 0) {
                 break;
             }
 
-            $formattedoptions[$year * 10 + 1] =
-                    get_string('wintersemester', 'customfield_semester') . ' ' . $year . '/' . ($year + 1);
+            $formattedoptions[$year * 10 + 1] = $wintersemesterstring . ' ' . $year . '/' .
+                    substr($year + 1, 2, 2);
         }
 
         $elementname = $this->get_form_element_name();
@@ -142,7 +144,8 @@ class data_controller extends \core_customfield\data_controller {
             if ($semester === 0) {
                 return get_string('summersemester', 'customfield_semester') . ' ' . $year;
             } else {
-                return get_string('wintersemester', 'customfield_semester') . ' ' . $year . '/' . ($year + 1);
+                return get_string('wintersemester', 'customfield_semester') . ' ' . $year . '/' .
+                        substr($year + 1, 2, 2);
             }
         }
     }
