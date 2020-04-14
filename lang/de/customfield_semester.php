@@ -26,8 +26,8 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Semesterfeld';
 $string['semesterindependent'] = 'Semesterunabhängig';
-$string['summersemester'] = 'SoSe';
-$string['wintersemester'] = 'WiSe';
+$string['summersemester'] = 'SoSe {$a}';
+$string['wintersemester'] = 'WiSe {$a}';
 $string['specificsettings'] = 'Einstellungen für das Semesterfeld';
 $string['showmonthsintofuture'] = 'Ein Semester ist auswählbar, wenn es in weniger als X Monaten beginnt.';
 $string['defaultmonthsintofuture'] = 'Standard ist das Semester in X Monaten.';
