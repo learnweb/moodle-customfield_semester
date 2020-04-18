@@ -25,7 +25,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Semester field';
-$string['semesterindependent'] = 'Term independent';
+$string['semesterindependent'] = 'Term-independent';
 $string['summersemester'] = 'ST {$a}';
 $string['wintersemester'] = 'WT {$a}';
 $string['specificsettings'] = 'Semester field settings';
