@@ -90,6 +90,7 @@ class data_controller extends \core_customfield\data_controller {
 
         $elementname = $this->get_form_element_name();
         $mform->addElement('select', $elementname, $this->get_field()->get_formatted_name(), $formattedoptions);
+        $mform->setDefault($elementname, $this->get_default_value());
 
         if ($field->get_configdata_property('required')) {
             $mform->addRule($elementname, null, 'required', null, 'client');
