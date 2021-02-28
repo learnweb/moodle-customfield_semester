@@ -157,14 +157,64 @@ class data_controller extends \core_customfield\data_controller {
     public static function get_semester_for_datetime(DateTime $datetime): int {
         $year = (int) $datetime->format('Y');
         $month = (int) $datetime->format('m');
-        if ($month < 4) {
+        $summertermstartmonth = self::get_summerterm_startmonth();
+        $wintertermstartmonth = self::get_winterterm_startmonth();
+        if ($month < $summertermstartmonth) {
             $year--;
             $semester = 1;
-        } else if ($month < 10) {
+        } else if ($month < $wintertermstartmonth) {
             $semester = 0;
         } else {
             $semester = 1;
         }
         return $year * 10 + $semester;
+    }
+
+    /**
+     * Returns the configured start month of the summer term from the plugin settings.
+     *
+     * @return int
+     */
+    public static function get_summerterm_startmonth(): int {
+        global $CFG;
+
+        // Require local library.
+        require_once($CFG->dirroot.'/customfield/field/semester/locallib.php');
+
+        // Get config from DB.
+        $config = get_config('customfield_semester');
+
+        // Double-check that the value is within the acceptable range. If not, return the default value.
+        if (is_numeric($config->summertermstartmonth) == false ||
+                $config->summertermstartmonth < 1 || $config->summertermstartmonth > 12 ||
+                $config->summertermstartmonth > $config->wintertermstartmonth) {
+            return CUSTOMFIELD_SEMESTER_SUMMERTERMSTART;
+        }
+
+        return $config->summertermstartmonth;
+    }
+
+    /**
+     * Returns the configured start month of the winter term from the plugin settings.
+     *
+     * @return int
+     */
+    public static function get_winterterm_startmonth(): int {
+        global $CFG;
+
+        // Require local library.
+        require_once($CFG->dirroot.'/customfield/field/semester/locallib.php');
+
+        // Get config from DB.
+        $config = get_config('customfield_semester');
+
+        // Double-check that the value is within the acceptable range. If not, return the default value.
+        if (is_numeric($config->wintertermstartmonth) == false ||
+                $config->wintertermstartmonth < 1 || $config->wintertermstartmonth > 12 ||
+                $config->wintertermstartmonth < $config->summertermstartmonth) {
+            return CUSTOMFIELD_SEMESTER_WINTERTERMSTART;
+        }
+
+        return $config->wintertermstartmonth;
     }
 }
