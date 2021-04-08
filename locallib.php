@@ -27,3 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 // Constants for term default start months.
 define('CUSTOMFIELD_SEMESTER_SUMMERTERMSTART', 4);
 define('CUSTOMFIELD_SEMESTER_WINTERTERMSTART', 10);
+
+// Constants for term presentation order.
+define('CUSTOMFIELD_SEMESTER_PRESENTATION_ASC', 'asc');
+define('CUSTOMFIELD_SEMESTER_PRESENTATION_DESC', 'desc');

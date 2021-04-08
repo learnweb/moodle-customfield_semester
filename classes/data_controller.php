@@ -66,6 +66,15 @@ class data_controller extends \core_customfield\data_controller {
      * @param \MoodleQuickForm $mform
      */
     public function instance_form_definition(\MoodleQuickForm $mform) {
+        global $CFG;
+
+        // Require local library.
+        require_once($CFG->dirroot.'/customfield/field/semester/locallib.php');
+
+        // Get config from DB.
+        $config = get_config('customfield_semester');
+
+        // Compose the field values.
         $field = $this->get_field();
         $formattedoptions = array(
                 1 => get_string('semesterindependent', 'customfield_semester')
@@ -88,10 +97,18 @@ class data_controller extends \core_customfield\data_controller {
                     $year . '/' . substr($year + 1, 2, 2));
         }
 
+        // The values were composed in CUSTOMFIELD_SEMESTER_PRESENTATION_ASC order here.
+        // If the admin wants to present them in CUSTOMFIELD_SEMESTER_PRESENTATION_DESC order, we need to reverse the array now.
+        if ($config->termpresentationorder == CUSTOMFIELD_SEMESTER_PRESENTATION_DESC) {
+            $formattedoptions = array_reverse($formattedoptions, true);
+        }
+
+        // Build the field widget.
         $elementname = $this->get_form_element_name();
         $mform->addElement('select', $elementname, $this->get_field()->get_formatted_name(), $formattedoptions);
         $mform->setDefault($elementname, $this->get_default_value());
 
+        // Add the required flag if necessary.
         if ($field->get_configdata_property('required')) {
             $mform->addRule($elementname, null, 'required', null, 'client');
         }

@@ -46,4 +46,13 @@ if ($ADMIN->fulltree) {
             get_string('startmonthnote', 'customfield_semester', null, true);
     $setting = new admin_setting_configtext($name, $title, $description, CUSTOMFIELD_SEMESTER_WINTERTERMSTART, $monthregex, 2);
     $settings->add($setting);
+
+    // Setting for the term presentation order.
+    $options = array (CUSTOMFIELD_SEMESTER_PRESENTATION_ASC => get_string('termpresentationasc', 'customfield_semester'),
+            CUSTOMFIELD_SEMESTER_PRESENTATION_DESC => get_string('termpresentationdesc', 'customfield_semester'));
+    $name = 'customfield_semester/termpresentationorder';
+    $title = get_string('termpresentationorder', 'customfield_semester', null, true);
+    $description = get_string('termpresentationorder_desc', 'customfield_semester', null, true);
+    $setting = new admin_setting_configselect($name, $title, $description, CUSTOMFIELD_SEMESTER_PRESENTATION_ASC, $options);
+    $settings->add($setting);
 }
