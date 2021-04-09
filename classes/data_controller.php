@@ -18,8 +18,12 @@
  * Semester customfield data controller
  *
  * Semesters are encoded as YYYYS, where YYYY is the year when the semester begins and
- * S is 0 = summersemester and 1 = wintersemester. So 20191 stands for WiSe 2019/2020.
- * Exception: 0 stands for semesterindepentent.
+ * S is the identifier of the term.
+ *
+ * The identifier of the term is depending on the admin setting customfield_semester/internaltermrepresentation.
+ * By default, it is 0 = summer term and 1 = winter term. So YYYYS = 20191 stands for the winter term 2019/20.
+ *
+ * In addition to that, there are term-independent terms which are represented by YYYYS = 1.
  *
  * @package   customfield_semester
  * @copyright 2020 Justus Dieckmann WWU
@@ -77,7 +81,7 @@ class data_controller extends \core_customfield\data_controller {
         // Compose the field values.
         $field = $this->get_field();
         $formattedoptions = array(
-                1 => get_string('semesterindependent', 'customfield_semester')
+                self::get_termindependent_representation() => get_string('semesterindependent', 'customfield_semester')
         );
         $showmonthsintofuture = $this->get_field()->get_configdata_property('showmonthsintofuture');
         $endtime = new DateTime("+$showmonthsintofuture months");
@@ -87,14 +91,15 @@ class data_controller extends \core_customfield\data_controller {
 
         $beginofsemesters = $this->get_field()->get_configdata_property('beginofsemesters');
         for ($year = $beginofsemesters; $year <= $endyear; $year++) {
-            $formattedoptions[$year * 10] = get_string('summersemester', 'customfield_semester', $year);
+            $formattedoptions[$year * 10 + self::get_summerterm_representation()] =
+                    get_string('summersemester', 'customfield_semester', $year);
 
-            if ($year == $endyear && $endsemester == 0) {
+            if ($year == $endyear && $endsemester == self::get_summerterm_representation()) {
                 break;
             }
 
-            $formattedoptions[$year * 10 + 1] = get_string('wintersemester', 'customfield_semester',
-                    $year . '/' . substr($year + 1, 2, 2));
+            $formattedoptions[$year * 10 + self::get_winterterm_representation()] =
+                    get_string('wintersemester', 'customfield_semester', $year . '/' . substr($year + 1, 2, 2));
         }
 
         // The values were composed in CUSTOMFIELD_SEMESTER_PRESENTATION_ASC order here.
@@ -146,22 +151,24 @@ class data_controller extends \core_customfield\data_controller {
     /**
      * Returns the human readable Semester name for a semesterid.
      *
-     * @param int $value the semesterid (YYYYS as descibed at the top of the file).
+     * @param int $value the semesterid (YYYYS as described at the top of the file).
      * @return string|null The human readable semester name
      */
     public static function get_name_for_semester(int $value) {
-        if ($value === 1) {
+        if ($value === self::get_termindependent_representation()) {
             return get_string('semesterindependent', 'customfield_semester');
         } else if ($value == null) {
             return null;
         } else {
             $year = intdiv($value, 10);
             $semester = $value % 10;
-            if ($semester === 0) {
+            if ($semester === self::get_summerterm_representation()) {
                 return get_string('summersemester', 'customfield_semester', $year);
-            } else {
+            } else if ($semester === self::get_winterterm_representation()) {
                 return get_string('wintersemester', 'customfield_semester',
                         $year . '/' . substr($year + 1, 2, 2));
+            } else {
+                return null;
             }
         }
     }
@@ -178,11 +185,11 @@ class data_controller extends \core_customfield\data_controller {
         $wintertermstartmonth = self::get_winterterm_startmonth();
         if ($month < $summertermstartmonth) {
             $year--;
-            $semester = 1;
+            $semester = self::get_winterterm_representation();
         } else if ($month < $wintertermstartmonth) {
-            $semester = 0;
+            $semester = self::get_summerterm_representation();
         } else {
-            $semester = 1;
+            $semester = self::get_winterterm_representation();
         }
         return $year * 10 + $semester;
     }
@@ -233,5 +240,95 @@ class data_controller extends \core_customfield\data_controller {
         }
 
         return $config->wintertermstartmonth;
+    }
+
+    /**
+     * Returns the configured internal representation for the summer term.
+     *
+     * @return int
+     */
+    public static function get_summerterm_representation(): int {
+        global $CFG;
+
+        // Static variable to remember the return value for subsequent calls of this function.
+        static $returnvalue = null;
+
+        // If not already done in a previous call, calculate the return value.
+        if ($returnvalue === null) {
+            // Require local library.
+            require_once($CFG->dirroot.'/customfield/field/semester/locallib.php');
+
+            // Get config from DB.
+            $config = get_config('customfield_semester');
+
+            // If the setting was changed to something different from the default.
+            if ($config->internaltermrepresentation == CUSTOMFIELD_SEMESTER_INTERNAL_ST1WT2) {
+                $returnvalue = CUSTOMFIELD_SEMESTER_INTERNAL_ST1WT2_ST;
+
+                // Otherwise, return the default representation.
+            } else {
+                $returnvalue = CUSTOMFIELD_SEMESTER_INTERNAL_ST0WT1_ST;
+            }
+        }
+
+        // Return value.
+        return $returnvalue;
+    }
+
+    /**
+     * Returns the configured internal representation for the winter term.
+     *
+     * @return int
+     */
+    public static function get_winterterm_representation(): int {
+        global $CFG;
+
+        // Static variable to remember the return value for subsequent calls of this function.
+        static $returnvalue = null;
+
+        // If not already done in a previous call, calculate the return value.
+        if ($returnvalue === null) {
+            // Require local library.
+            require_once($CFG->dirroot.'/customfield/field/semester/locallib.php');
+
+            // Get config from DB.
+            $config = get_config('customfield_semester');
+
+            // If the setting was changed to something different from the default.
+            if ($config->internaltermrepresentation == CUSTOMFIELD_SEMESTER_INTERNAL_ST1WT2) {
+                $returnvalue = CUSTOMFIELD_SEMESTER_INTERNAL_ST1WT2_WT;
+
+                // Otherwise, return the default representation.
+            } else {
+                $returnvalue = CUSTOMFIELD_SEMESTER_INTERNAL_ST0WT1_WT;
+            }
+        }
+
+        // Return value.
+        return $returnvalue;
+    }
+
+    /**
+     * Returns the configured internal representation for the term-independent term.
+     *
+     * @return int
+     */
+    public static function get_termindependent_representation(): int {
+        global $CFG;
+
+        // Static variable to remember the return value for subsequent calls of this function.
+        static $returnvalue = null;
+
+        // If not already done in a previous call, calculate the return value.
+        if ($returnvalue === null) {
+            // Require local library.
+            require_once($CFG->dirroot.'/customfield/field/semester/locallib.php');
+
+            // Return the default representation.
+            $returnvalue = CUSTOMFIELD_SEMESTER_INTERNAL_TERMINDEPENDENT;
+        }
+
+        // Return value.
+        return $returnvalue;
     }
 }

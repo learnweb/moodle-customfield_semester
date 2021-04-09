@@ -25,5 +25,5 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'customfield_semester';
-$plugin->version   = 2020041303;
+$plugin->version   = 2020041304;
 $plugin->requires  = 2019111800;

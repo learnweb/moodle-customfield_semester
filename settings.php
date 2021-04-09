@@ -55,4 +55,14 @@ if ($ADMIN->fulltree) {
     $description = get_string('termpresentationorder_desc', 'customfield_semester', null, true);
     $setting = new admin_setting_configselect($name, $title, $description, CUSTOMFIELD_SEMESTER_PRESENTATION_ASC, $options);
     $settings->add($setting);
+
+    // Setting for the internal term representation.
+    $options = array (CUSTOMFIELD_SEMESTER_INTERNAL_ST0WT1 => get_string('internaltermrepresentationst0wt1', 'customfield_semester'),
+            CUSTOMFIELD_SEMESTER_INTERNAL_ST1WT2 => get_string('internaltermrepresentationst1wt2', 'customfield_semester'));
+    $name = 'customfield_semester/internaltermrepresentation';
+    $title = get_string('internaltermrepresentation', 'customfield_semester', null, true);
+    $description = get_string('internaltermrepresentation_desc', 'customfield_semester', null, true).'<br />'.
+            get_string('internaltermrepresentationwarning', 'customfield_semester', null, true);
+    $setting = new admin_setting_configselect($name, $title, $description, CUSTOMFIELD_SEMESTER_INTERNAL_ST0WT1, $options);
+    $settings->add($setting);
 }
