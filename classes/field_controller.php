@@ -92,32 +92,13 @@ class field_controller extends \core_customfield\field_controller {
      * @return array
      */
     public function course_grouping_format_values($values): array {
-        global $CFG;
-
-        // Require local library.
-        require_once($CFG->dirroot.'/customfield/field/semester/locallib.php');
-
-        // Get config from DB.
-        $config = get_config('customfield_semester');
-
-        // Prepare return array.
         $ret = [];
-
-        // The values arrive in CUSTOMFIELD_SEMESTER_PRESENTATION_ASC order here.
-        // If the admin wants to present them in CUSTOMFIELD_SEMESTER_PRESENTATION_DESC order, we need to reverse the array now.
-        if ($config->termpresentationorder == CUSTOMFIELD_SEMESTER_PRESENTATION_DESC) {
-            $values = array_reverse($values, true);
-        }
-
-        // Iterate over given values.
         foreach ($values as $value) {
             $name = data_controller::get_name_for_semester($value);
             if ($name) {
                 $ret[$value] = $name;
             }
         }
-
-        // Return values.
         return $ret;
     }
 }
