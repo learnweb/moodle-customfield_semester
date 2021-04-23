@@ -15,15 +15,28 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Customfield Semester Type
+ * Customfield Semester Type - Local library.
  *
  * @package   customfield_semester
- * @copyright 2020 Justus Dieckmann WWU
+ * @copyright 2021 Alexander Bias
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'customfield_semester';
-$plugin->version   = 2020041304;
-$plugin->requires  = 2019111800;
+// Constants for term default start months.
+define('CUSTOMFIELD_SEMESTER_SUMMERTERMSTART', 4);
+define('CUSTOMFIELD_SEMESTER_WINTERTERMSTART', 10);
+
+// Constants for term presentation order.
+define('CUSTOMFIELD_SEMESTER_PRESENTATION_ASC', 'asc');
+define('CUSTOMFIELD_SEMESTER_PRESENTATION_DESC', 'desc');
+
+// Constants for internal term representation.
+define('CUSTOMFIELD_SEMESTER_INTERNAL_ST0WT1', 'st0wt1');
+define('CUSTOMFIELD_SEMESTER_INTERNAL_ST0WT1_ST', 0);
+define('CUSTOMFIELD_SEMESTER_INTERNAL_ST0WT1_WT', 1);
+define('CUSTOMFIELD_SEMESTER_INTERNAL_ST1WT2', 'st1wt2');
+define('CUSTOMFIELD_SEMESTER_INTERNAL_ST1WT2_ST', 1);
+define('CUSTOMFIELD_SEMESTER_INTERNAL_ST1WT2_WT', 2);
+define('CUSTOMFIELD_SEMESTER_INTERNAL_TERMINDEPENDENT', 1);
