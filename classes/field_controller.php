@@ -24,8 +24,6 @@
 
 namespace customfield_semester;
 
-defined('MOODLE_INTERNAL') || die;
-
 /**
  * Semester customfield field controller
  *

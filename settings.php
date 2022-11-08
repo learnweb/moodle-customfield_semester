@@ -57,8 +57,9 @@ if ($ADMIN->fulltree) {
     $settings->add($setting);
 
     // Setting for the internal term representation.
-    $options = array (CUSTOMFIELD_SEMESTER_INTERNAL_ST0WT1 => get_string('internaltermrepresentationst0wt1', 'customfield_semester'),
-            CUSTOMFIELD_SEMESTER_INTERNAL_ST1WT2 => get_string('internaltermrepresentationst1wt2', 'customfield_semester'));
+    $options = array (CUSTOMFIELD_SEMESTER_INTERNAL_ST0WT1 => get_string('internaltermrepresentationst0wt1',
+        'customfield_semester'), CUSTOMFIELD_SEMESTER_INTERNAL_ST1WT2 => get_string(
+            'internaltermrepresentationst1wt2', 'customfield_semester'));
     $name = 'customfield_semester/internaltermrepresentation';
     $title = get_string('internaltermrepresentation', 'customfield_semester', null, true);
     $description = get_string('internaltermrepresentation_desc', 'customfield_semester', null, true).'<br />'.

@@ -26,8 +26,6 @@ use core_customfield\data_controller;
 use core_customfield\privacy\customfield_provider;
 use core_privacy\local\request\writer;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Privacy Subsystem for customfield_semester implementing null_provider.
  *

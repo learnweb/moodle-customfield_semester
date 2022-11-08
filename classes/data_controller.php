@@ -34,8 +34,6 @@ namespace customfield_semester;
 
 use DateTime;
 
-defined('MOODLE_INTERNAL') || die;
-
 /**
  * Semester customfield data controller
  *
