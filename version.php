@@ -18,6 +18,7 @@
  * Customfield Semester Type
  *
  * @package   customfield_semester
+ * @copyright 2025 Thomas Niedermaier Universität Münster
  * @copyright 2020 Justus Dieckmann WWU
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -25,7 +26,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'customfield_semester';
-$plugin->version   = 2020041304;
-$plugin->requires  = 2019111800;
-$plugin->release = 'v4.0-r1';
+$plugin->version   = 2025030600;
+$plugin->requires  = 2024100700;
+$plugin->release = 'v4.5-r1';
 $plugin->maturity = MATURITY_STABLE;
