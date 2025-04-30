@@ -48,8 +48,8 @@ if ($ADMIN->fulltree) {
     $settings->add($setting);
 
     // Setting for the term presentation order.
-    $options = array (CUSTOMFIELD_SEMESTER_PRESENTATION_ASC => get_string('termpresentationasc', 'customfield_semester'),
-            CUSTOMFIELD_SEMESTER_PRESENTATION_DESC => get_string('termpresentationdesc', 'customfield_semester'));
+    $options = [CUSTOMFIELD_SEMESTER_PRESENTATION_ASC => get_string('termpresentationasc', 'customfield_semester'),
+            CUSTOMFIELD_SEMESTER_PRESENTATION_DESC => get_string('termpresentationdesc', 'customfield_semester')];
     $name = 'customfield_semester/termpresentationorder';
     $title = get_string('termpresentationorder', 'customfield_semester', null, true);
     $description = get_string('termpresentationorder_desc', 'customfield_semester', null, true);
@@ -57,9 +57,9 @@ if ($ADMIN->fulltree) {
     $settings->add($setting);
 
     // Setting for the internal term representation.
-    $options = array (CUSTOMFIELD_SEMESTER_INTERNAL_ST0WT1 => get_string('internaltermrepresentationst0wt1',
+    $options = [CUSTOMFIELD_SEMESTER_INTERNAL_ST0WT1 => get_string('internaltermrepresentationst0wt1',
         'customfield_semester'), CUSTOMFIELD_SEMESTER_INTERNAL_ST1WT2 => get_string(
-            'internaltermrepresentationst1wt2', 'customfield_semester'));
+            'internaltermrepresentationst1wt2', 'customfield_semester')];
     $name = 'customfield_semester/internaltermrepresentation';
     $title = get_string('internaltermrepresentation', 'customfield_semester', null, true);
     $description = get_string('internaltermrepresentation_desc', 'customfield_semester', null, true).'<br />'.

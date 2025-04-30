@@ -78,9 +78,10 @@ class data_controller extends \core_customfield\data_controller {
 
         // Compose the field values.
         $field = $this->get_field();
-        $formattedoptions = array(
-                self::get_termindependent_representation() => get_string('semesterindependent', 'customfield_semester')
-        );
+        $formattedoptions = [
+                self::get_termindependent_representation() =>
+                    get_string('semesterindependent', 'customfield_semester'),
+        ];
         $showmonthsintofuture = $this->get_field()->get_configdata_property('showmonthsintofuture');
         $endtime = new DateTime("+$showmonthsintofuture months");
         $endkey = self::get_semester_for_datetime($endtime);
