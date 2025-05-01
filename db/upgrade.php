@@ -41,8 +41,8 @@ function xmldb_customfield_semester_upgrade($oldversion) {
             set_config('visibleincoursesettings', 1, 'customfield_semester');
         }
 
-        // Opencast savepoint reached.
-        upgrade_plugin_savepoint(true, 2025043000, 'opencast');
+        // Customfield_semester savepoint reached.
+        upgrade_plugin_savepoint(true, 2025043000, 'customfield', 'semester');
     }
 
     return true;
