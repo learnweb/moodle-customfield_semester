@@ -70,11 +70,15 @@ class data_controller extends \core_customfield\data_controller {
     public function instance_form_definition(\MoodleQuickForm $mform) {
         global $CFG;
 
-        // Require local library.
-        require_once($CFG->dirroot.'/customfield/field/semester/locallib.php');
-
         // Get config from DB.
         $config = get_config('customfield_semester');
+
+        if (!$config->visibleincoursesettings) {
+            return true;
+        }
+
+        // Require local library.
+        require_once($CFG->dirroot.'/customfield/field/semester/locallib.php');
 
         // Compose the field values.
         $field = $this->get_field();
@@ -127,13 +131,18 @@ class data_controller extends \core_customfield\data_controller {
      */
     public function instance_form_validation(array $data, array $files): array {
         $errors = parent::instance_form_validation($data, $files);
-        if ($this->get_field()->get_configdata_property('required')) {
-            // Standard required rule does not work on select element.
-            $elementname = $this->get_form_element_name();
-            if (empty($data[$elementname])) {
-                $errors[$elementname] = get_string('err_required', 'form');
+
+        $config = get_config('customfield_semester');
+        if ($config->visibleincoursesettings) {
+            if ($this->get_field()->get_configdata_property('required')) {
+                // Standard required rule does not work on select element.
+                $elementname = $this->get_form_element_name();
+                if (empty($data[$elementname])) {
+                    $errors[$elementname] = get_string('err_required', 'form');
+                }
             }
         }
+
         return $errors;
     }
 
