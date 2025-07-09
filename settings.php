@@ -67,14 +67,4 @@ if ($ADMIN->fulltree) {
     $setting = new admin_setting_configselect($name, $title, $description, CUSTOMFIELD_SEMESTER_INTERNAL_ST0WT1, $options);
     $settings->add($setting);
 
-    // Setting if the semester field is visible and editable in the course settings or not.
-    $name = 'customfield_semester/visibleincoursesettings';
-    $title = get_string('visibleincoursesettings', 'customfield_semester', null, true);
-    $description = get_string('visibleincoursesettings_desc', 'customfield_semester', null, true);
-    $setting = new  admin_setting_configcheckbox($name,
-        $title,
-        $description,
-        1, 1, 0);
-    $settings->add($setting);
-
 }

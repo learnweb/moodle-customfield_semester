@@ -32,6 +32,7 @@
 
 namespace customfield_semester;
 
+use core\context\system;
 use DateTime;
 
 /**
@@ -73,7 +74,8 @@ class data_controller extends \core_customfield\data_controller {
         // Get config from DB.
         $config = get_config('customfield_semester');
 
-        if (!$config->visibleincoursesettings) {
+        $context = system::instance();
+        if (!has_capability('customfields/semester:edit_semester', $context)) {
             return true;
         }
 
@@ -132,8 +134,8 @@ class data_controller extends \core_customfield\data_controller {
     public function instance_form_validation(array $data, array $files): array {
         $errors = parent::instance_form_validation($data, $files);
 
-        $config = get_config('customfield_semester');
-        if ($config->visibleincoursesettings) {
+        $context = system::instance();
+        if (has_capability('customfields/semester:edit_semester', $context)) {
             if ($this->get_field()->get_configdata_property('required')) {
                 // Standard required rule does not work on select element.
                 $elementname = $this->get_form_element_name();

@@ -45,5 +45,14 @@ function xmldb_customfield_semester_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2025043000, 'customfield', 'semester');
     }
 
+    if ($oldversion < 2025043001) {
+
+        // Unset the admin setting which is not used anymore.
+        unset_config('visibleincoursesettings', 'customfield_semester');
+
+        // Customfield_semester savepoint reached.
+        upgrade_plugin_savepoint(true, 2025043001, 'customfield', 'semester');
+    }
+
     return true;
 }
