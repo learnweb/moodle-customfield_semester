@@ -74,11 +74,6 @@ class data_controller extends \core_customfield\data_controller {
         // Get config from DB.
         $config = get_config('customfield_semester');
 
-        $context = system::instance();
-        if (!has_capability('customfields/semester:edit_semester', $context)) {
-            return true;
-        }
-
         // Require local library.
         require_once($CFG->dirroot.'/customfield/field/semester/locallib.php');
 
@@ -135,7 +130,7 @@ class data_controller extends \core_customfield\data_controller {
         $errors = parent::instance_form_validation($data, $files);
 
         $context = system::instance();
-        if (has_capability('customfields/semester:edit_semester', $context)) {
+        if (has_capability('customfield/semester:edit_semester', $context)) {
             if ($this->get_field()->get_configdata_property('required')) {
                 // Standard required rule does not work on select element.
                 $elementname = $this->get_form_element_name();
