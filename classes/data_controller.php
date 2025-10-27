@@ -64,8 +64,10 @@ class data_controller extends \core_customfield\data_controller {
 
     /**
      * Add fields for editing a textarea field.
-     *
      * @param \MoodleQuickForm $mform
+     * @return true|void
+     * @throws \coding_exception
+     * @throws \dml_exception
      */
     public function instance_form_definition(\MoodleQuickForm $mform) {
         global $CFG;
@@ -128,6 +130,8 @@ class data_controller extends \core_customfield\data_controller {
      * @param array $data
      * @param array $files
      * @return array
+     * @throws \coding_exception
+     * @throws \dml_exception
      */
     public function instance_form_validation(array $data, array $files): array {
         $errors = parent::instance_form_validation($data, $files);
@@ -135,7 +139,7 @@ class data_controller extends \core_customfield\data_controller {
         $config = get_config('customfield_semester');
         if ($config->visibleincoursesettings) {
             if ($this->get_field()->get_configdata_property('required')) {
-                // Standard required rule does not work on select element.
+                // Standard required rule does not work on select-element.
                 $elementname = $this->get_form_element_name();
                 if (empty($data[$elementname])) {
                     $errors[$elementname] = get_string('err_required', 'form');
@@ -157,10 +161,11 @@ class data_controller extends \core_customfield\data_controller {
     }
 
     /**
-     * Returns the human readable Semester name for a semesterid.
+     * Returns the human-readable Semester name for a semesterid.
      *
      * @param int $value the semesterid (YYYYS as described at the top of the file).
-     * @return string|null The human readable semester name
+     * @return string|null The human-readable semester name
+     * @throws \coding_exception
      */
     public static function get_name_for_semester(int $value) {
         if ($value === self::get_termindependent_representation()) {
