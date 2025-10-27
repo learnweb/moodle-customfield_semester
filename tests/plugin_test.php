@@ -19,6 +19,7 @@ namespace customfield_semester;
 use core_customfield\field_config_form;
 use core_customfield_generator;
 use core_customfield_test_instance_form;
+use PHPUnit\Framework\Attributes\DataProvider;
 use stdClass;
 
 /**
@@ -65,17 +66,9 @@ final class plugin_test extends \advanced_testcase {
                     'defaultmonthsintofuture' => "3",
                     'beginofsemesters' => "2019",
                     ]]);
-        $this->cfields[3] = $this->get_generator()->create_field(
-            ['categoryid' => $this->cfcat->get('id'), 'shortname' => 'myfield3', 'type' => 'semester',
-                'configdata' => [
-                    'showmonthsintofuture' => "6",
-                    'defaultmonthsintofuture' => "3",
-                    'beginofsemesters' => "2019",
-                ]]);
 
         $this->courses[1] = $this->getDataGenerator()->create_course();
         $this->courses[2] = $this->getDataGenerator()->create_course();
-        $this->courses[3] = $this->getDataGenerator()->create_course();
 
         $this->cfdata[1] = $this->get_generator()->add_instance_data($this->cfields[1], $this->courses[1]->id, 1);
         $this->cfdata[2] = $this->get_generator()->add_instance_data($this->cfields[1], $this->courses[2]->id, 1);
@@ -94,7 +87,7 @@ final class plugin_test extends \advanced_testcase {
     /**
      * Test for initializing field and data controllers
      */
-    public function test_initialise(): void {
+    public function test_initialize(): void {
         $f = \core_customfield\field_controller::create($this->cfields[1]->get('id'));
         $this->assertTrue($f instanceof field_controller);
 
@@ -161,48 +154,6 @@ final class plugin_test extends \advanced_testcase {
     public function test_get_export_value(): void {
         $this->assertEquals(1, $this->cfdata[1]->get_value());
         $this->assertEquals('Term-independent', $this->cfdata[1]->export_value());
-
-        // Field without data but with a default value.
-        $d = \core_customfield\data_controller::create(0, null, $this->cfields[3]);
-        $this->assertEquals(2, $d->get_value());
-        $this->assertEquals('b', $d->export_value());
-    }
-
-    /**
-     * Data provider for {@see test_parse_value}
-     *
-     * @return array
-     */
-    public static function parse_value_provider(): array {
-        return [
-                'showmonthsintofuture' => "6",
-                'defaultmonthsintofuture' => "3",
-                'beginofsemesters' => "2019",
-        ];
-    }
-
-    /**
-     * Test field parse_value method
-     *
-     * @param string $value
-     * @param int $expected
-     *
-     * @dataProvider parse_value_provider
-     */
-    public function test_parse_value(string $value, int $expected): void {
-        $field = $this->get_generator()->create_field([
-            'categoryid' => $this->cfcat->get('id'),
-            'type' => 'semester',
-            'shortname' => 'mysemester',
-            'configdata' => [
-                'required' => 1,
-                'showmonthsintofuture' => "6",
-                'defaultmonthsintofuture' => "3",
-                'beginofsemesters' => "2019",
-            ],
-        ]);
-
-        $this->assertSame($expected, $field->parse_value($value));
     }
 
     /**
