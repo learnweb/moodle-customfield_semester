@@ -55,7 +55,7 @@ final class plugin_test extends \advanced_testcase {
                 'configdata' => [
                     'showmonthsintofuture' => "6",
                     'defaultmonthsintofuture' => "3",
-                    'beginofsemesters' => "2019"
+                    'beginofsemesters' => "2019",
                 ]]);
         $this->cfields[2] = $this->get_generator()->create_field(
             ['categoryid' => $this->cfcat->get('id'), 'shortname' => 'myfield2', 'type' => 'semester',
@@ -63,14 +63,14 @@ final class plugin_test extends \advanced_testcase {
                     'required' => 1,
                     'showmonthsintofuture' => "6",
                     'defaultmonthsintofuture' => "3",
-                    'beginofsemesters' => "2019"
+                    'beginofsemesters' => "2019",
                     ]]);
         $this->cfields[3] = $this->get_generator()->create_field(
             ['categoryid' => $this->cfcat->get('id'), 'shortname' => 'myfield3', 'type' => 'semester',
                 'configdata' => [
                     'showmonthsintofuture' => "6",
                     'defaultmonthsintofuture' => "3",
-                    'beginofsemesters' => "2019"
+                    'beginofsemesters' => "2019",
                 ]]);
 
         $this->courses[1] = $this->getDataGenerator()->create_course();
