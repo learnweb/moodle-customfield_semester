@@ -29,5 +29,5 @@ $plugin->component = 'customfield_semester';
 $plugin->version   = 2025102700;
 $plugin->requires  = 2022112800;
 $plugin->release = 'v5.0-r1';
-$plugin->supported = [401, 500];
+$plugin->supported = [405, 500];
 $plugin->maturity = MATURITY_RC;
