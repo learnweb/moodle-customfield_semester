@@ -160,40 +160,12 @@ final class plugin_test extends \advanced_testcase {
      */
     public function test_get_export_value(): void {
         $this->assertEquals(1, $this->cfdata[1]->get_value());
-        $this->assertEquals('a', $this->cfdata[1]->export_value());
+        $this->assertEquals('Term-independent', $this->cfdata[1]->export_value());
 
         // Field without data but with a default value.
         $d = \core_customfield\data_controller::create(0, null, $this->cfields[3]);
         $this->assertEquals(2, $d->get_value());
         $this->assertEquals('b', $d->export_value());
-    }
-
-    /**
-     * Test getting field options, formatted
-     */
-    public function test_get_options(): void {
-        filter_set_global_state('multilang', TEXTFILTER_ON);
-        filter_set_applies_to_strings('multilang', true);
-
-        $field = $this->get_generator()->create_field([
-            'categoryid' => $this->cfcat->get('id'),
-            'type' => 'semester',
-            'shortname' => 'mysemester',
-            'configdata' => [
-                'options' => <<<EOF
-                    <span lang="en" class="multilang">Beginner</span><span lang="es" class="multilang">Novato</span>
-                    <span lang="en" class="multilang">Intermediate</span><span lang="es" class="multilang">Intermedio</span>
-                    <span lang="en" class="multilang">Advanced</span><span lang="es" class="multilang">Avanzado</span>
-                EOF,
-            ],
-        ]);
-
-        $this->assertEquals([
-            '',
-            'Beginner',
-            'Intermediate',
-            'Advanced',
-        ], $field->get_options());
     }
 
     /**
@@ -203,10 +175,9 @@ final class plugin_test extends \advanced_testcase {
      */
     public static function parse_value_provider(): array {
         return [
-            ['Red', 1],
-            ['Blue', 2],
-            ['Green', 3],
-            ['Mauve', 0],
+                'showmonthsintofuture' => "6",
+                'defaultmonthsintofuture' => "3",
+                'beginofsemesters' => "2019",
         ];
     }
 
@@ -224,7 +195,10 @@ final class plugin_test extends \advanced_testcase {
             'type' => 'semester',
             'shortname' => 'mysemester',
             'configdata' => [
-                'options' => "Red\nBlue\nGreen",
+                'required' => 1,
+                'showmonthsintofuture' => "6",
+                'defaultmonthsintofuture' => "3",
+                'beginofsemesters' => "2019",
             ],
         ]);
 

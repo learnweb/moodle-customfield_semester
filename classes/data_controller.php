@@ -153,7 +153,8 @@ class data_controller extends \core_customfield\data_controller {
     /**
      * Returns value in a human-readable format
      *
-     * @return mixed|null value or null if empty
+     * @return string|null value or null if empty
+     * @throws \coding_exception
      */
     public function export_value() {
         $value = $this->get_value();
