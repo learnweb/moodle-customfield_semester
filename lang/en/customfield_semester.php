@@ -49,3 +49,4 @@ $string['visibleincoursesettings_desc'] = 'The semester field is visible and edi
 $string['wintersemester'] = 'WT {$a}';
 $string['wintertermstartmonth'] = 'The month when winter term starts';
 $string['wintertermstartmonth_desc'] = 'With this setting, you define in which month the winter term starts.';
+$string['privacy:metadata'] = 'The Semester menu field type plugin doesn\'t store any personal data; it uses tables defined in core.';
