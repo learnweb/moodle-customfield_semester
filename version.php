@@ -26,8 +26,8 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'customfield_semester';
-$plugin->version   = 2025102700;
-$plugin->requires  = 2022112800;
-$plugin->release = 'v5.0-r1';
+$plugin->version   = 2026061700;     // The current plugin version (Date: YYYYMMDDXX).
+$plugin->requires  = 2024100712;     // Requires 4.5+ Moodle version.
+$plugin->release = 'v5.2-r1';
 $plugin->supported = [405, 500];
 $plugin->maturity = MATURITY_RC;
