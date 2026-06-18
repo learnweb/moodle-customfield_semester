@@ -5,6 +5,3 @@ jobs:
   call:
     name: ""
     uses: learnweb/moodle-workflows-learnweb/.github/workflows/moodle-ci.yml@main
-    with:
-      MOODLE: MOODLE_502_STABLE
-      plugin: .
