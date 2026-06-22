@@ -4,25 +4,6 @@
   "main-php": "8.3",
   "main-db": "pgsql",
   "moodle-testmatrix": {
-    "MOODLE_405_STABLE": {
-      "php": [
-        "8.1",
-        "8.2",
-        "8.3"
-      ]
-    },
-    "MOODLE_500_STABLE": {
-      "php": [
-        "8.2",
-        "8.3",
-        "8.4"
-      ],
-      "db": [
-        "pgsql",
-        "mariadb",
-        "mysqli"
-      ]
-    },
     "MOODLE_502_STABLE": {
       "php": [
         "8.3",
