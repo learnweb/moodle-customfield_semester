@@ -32,7 +32,6 @@ use stdClass;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 final class plugin_test extends \advanced_testcase {
-
     /** @var stdClass[]  */
     private $courses = [];
     /** @var \core_customfield\category_controller */
@@ -57,7 +56,8 @@ final class plugin_test extends \advanced_testcase {
                     'showmonthsintofuture' => "6",
                     'defaultmonthsintofuture' => "3",
                     'beginofsemesters' => "2019",
-                ]]);
+            ]]
+        );
         $this->cfields[2] = $this->get_generator()->create_field(
             ['categoryid' => $this->cfcat->get('id'), 'shortname' => 'myfield2', 'type' => 'semester',
                 'configdata' => [
@@ -65,7 +65,8 @@ final class plugin_test extends \advanced_testcase {
                     'showmonthsintofuture' => "6",
                     'defaultmonthsintofuture' => "3",
                     'beginofsemesters' => "2019",
-                    ]]);
+            ]]
+        );
 
         $this->courses[1] = $this->getDataGenerator()->create_course();
         $this->courses[2] = $this->getDataGenerator()->create_course();
@@ -112,8 +113,16 @@ final class plugin_test extends \advanced_testcase {
         $submitdata['configdata'] = $this->cfields[1]->get('configdata');
 
         $submitdata = field_config_form::mock_ajax_submit($submitdata);
-        $form = new field_config_form(null, null, 'post', '', null, true,
-            $submitdata, true);
+        $form = new field_config_form(
+            null,
+            null,
+            'post',
+            '',
+            null,
+            true,
+            $submitdata,
+            true
+        );
         $form->set_data_for_dynamic_submission();
         $this->assertTrue($form->is_validated());
         $form->process_dynamic_submission();
@@ -131,15 +140,19 @@ final class plugin_test extends \advanced_testcase {
         // First try to submit without required field.
         $submitdata = (array)$this->courses[1];
         core_customfield_test_instance_form::mock_submit($submitdata, []);
-        $form = new core_customfield_test_instance_form('POST',
-            ['handler' => $handler, 'instance' => $this->courses[1]]);
+        $form = new core_customfield_test_instance_form(
+            'POST',
+            ['handler' => $handler, 'instance' => $this->courses[1]]
+        );
         $this->assertFalse($form->is_validated());
 
         // Now with required field.
         $submitdata['customfield_myfield2'] = 1;
         core_customfield_test_instance_form::mock_submit($submitdata, []);
-        $form = new core_customfield_test_instance_form('POST',
-            ['handler' => $handler, 'instance' => $this->courses[1]]);
+        $form = new core_customfield_test_instance_form(
+            'POST',
+            ['handler' => $handler, 'instance' => $this->courses[1]]
+        );
         $this->assertTrue($form->is_validated());
 
         $data = $form->get_data();

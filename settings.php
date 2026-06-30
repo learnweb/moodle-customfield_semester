@@ -26,7 +26,7 @@ defined('MOODLE_INTERNAL') || die();
 
 if ($ADMIN->fulltree) {
     // Require local library.
-    require_once($CFG->dirroot.'/customfield/field/semester/locallib.php');
+    require_once($CFG->dirroot . '/customfield/field/semester/locallib.php');
 
     // Prepare regex for month number. This will be used instead of the PARAM_* type within the admin settings.
     $monthregex = '/^([1-9]|1[0-2])$/';
@@ -34,7 +34,7 @@ if ($ADMIN->fulltree) {
     // Setting for the summer term start month.
     $name = 'customfield_semester/summertermstartmonth';
     $title = get_string('summertermstartmonth', 'customfield_semester', null, true);
-    $description = get_string('summertermstartmonth_desc', 'customfield_semester', null, true).'<br />'.
+    $description = get_string('summertermstartmonth_desc', 'customfield_semester', null, true) . '<br />' .
             get_string('startmonthnote', 'customfield_semester', null, true);
     $setting = new admin_setting_configtext($name, $title, $description, CUSTOMFIELD_SEMESTER_SUMMERTERMSTART, $monthregex, 2);
     $settings->add($setting);
@@ -42,7 +42,7 @@ if ($ADMIN->fulltree) {
     // Setting for the winter term start month.
     $name = 'customfield_semester/wintertermstartmonth';
     $title = get_string('wintertermstartmonth', 'customfield_semester', null, true);
-    $description = get_string('wintertermstartmonth_desc', 'customfield_semester', null, true).'<br />'.
+    $description = get_string('wintertermstartmonth_desc', 'customfield_semester', null, true) . '<br />' .
             get_string('startmonthnote', 'customfield_semester', null, true);
     $setting = new admin_setting_configtext($name, $title, $description, CUSTOMFIELD_SEMESTER_WINTERTERMSTART, $monthregex, 2);
     $settings->add($setting);
@@ -57,12 +57,16 @@ if ($ADMIN->fulltree) {
     $settings->add($setting);
 
     // Setting for the internal term representation.
-    $options = [CUSTOMFIELD_SEMESTER_INTERNAL_ST0WT1 => get_string('internaltermrepresentationst0wt1',
-        'customfield_semester'), CUSTOMFIELD_SEMESTER_INTERNAL_ST1WT2 => get_string(
-            'internaltermrepresentationst1wt2', 'customfield_semester')];
+    $options = [CUSTOMFIELD_SEMESTER_INTERNAL_ST0WT1 => get_string(
+        'internaltermrepresentationst0wt1',
+        'customfield_semester'
+    ), CUSTOMFIELD_SEMESTER_INTERNAL_ST1WT2 => get_string(
+        'internaltermrepresentationst1wt2',
+        'customfield_semester'
+    )];
     $name = 'customfield_semester/internaltermrepresentation';
     $title = get_string('internaltermrepresentation', 'customfield_semester', null, true);
-    $description = get_string('internaltermrepresentation_desc', 'customfield_semester', null, true).'<br />'.
+    $description = get_string('internaltermrepresentation_desc', 'customfield_semester', null, true) . '<br />' .
             get_string('internaltermrepresentationwarning', 'customfield_semester', null, true);
     $setting = new admin_setting_configselect($name, $title, $description, CUSTOMFIELD_SEMESTER_INTERNAL_ST0WT1, $options);
     $settings->add($setting);
@@ -71,10 +75,13 @@ if ($ADMIN->fulltree) {
     $name = 'customfield_semester/visibleincoursesettings';
     $title = get_string('visibleincoursesettings', 'customfield_semester', null, true);
     $description = get_string('visibleincoursesettings_desc', 'customfield_semester', null, true);
-    $setting = new  admin_setting_configcheckbox($name,
+    $setting = new  admin_setting_configcheckbox(
+        $name,
         $title,
         $description,
-        1, 1, 0);
+        1,
+        1,
+        0
+    );
     $settings->add($setting);
-
 }
