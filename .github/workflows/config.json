@@ -12,7 +12,7 @@
       "db": [
         "pgsql",
         "mariadb",
-        "mysql"
+        "mysqli"
       ]
     }
   }
