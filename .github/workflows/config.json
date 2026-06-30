@@ -10,7 +10,9 @@
         "8.4"
       ],
       "db": [
-        "pgsql"
+        "pgsql",
+        "mariadb",
+        "mysql"
       ]
     }
   }

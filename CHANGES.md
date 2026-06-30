@@ -1,7 +1,7 @@
 CHANGELOG
 =========
 
-v5.2-r1 (2026-06-17)
+v5.2-r1 (2026-06-30)
 ------------------
 * Moodle 5.2 compatible version
 
