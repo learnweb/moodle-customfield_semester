@@ -33,6 +33,7 @@ $string['internaltermrepresentationst0wt1'] = 'Represent the summer term as term
 $string['internaltermrepresentationst1wt2'] = 'Represent the summer term as term 1 and the winter term as term 2';
 $string['internaltermrepresentationwarning'] = '<strong>Warning:</strong> Changing this setting will <em>not</em> update existing field values in existing courses. Please change this setting only if you really need to and if you are aware that you will have to fill the fields of existing courses again.';
 $string['pluginname'] = 'Semester field';
+$string['privacy:metadata'] = 'The Semester menu field type plugin doesn\'t store any personal data; it uses tables defined in core.';
 $string['semesterindependent'] = 'Term-independent';
 $string['showmonthsintofuture'] = 'A semester will be selectable, if it begins in less than X months.';
 $string['specificsettings'] = 'Semester field settings';

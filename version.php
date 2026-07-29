@@ -18,6 +18,7 @@
  * Customfield Semester Type
  *
  * @package   customfield_semester
+ * @copyright 2026 Lena Herfeldt Universität Münster
  * @copyright 2025 Thomas Niedermaier Universität Münster
  * @copyright 2020 Justus Dieckmann WWU
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -26,8 +27,8 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'customfield_semester';
-$plugin->version   = 2025102700;
-$plugin->requires  = 2022112800;
-$plugin->release = 'v5.0-r1';
-$plugin->supported = [405, 500];
-$plugin->maturity = MATURITY_RC;
+$plugin->version   = 2026063000;     // The current plugin version (Date: YYYYMMDDXX).
+$plugin->requires  = 2026042000;     // Requires 5.2 Moodle version.
+$plugin->release = 'v5.2-r1';
+$plugin->supported = [502, 502]; // Moodle 5.2.
+$plugin->maturity = MATURITY_STABLE;

@@ -12,7 +12,8 @@ Feature: Managers can manage course custom fields semester
     And I navigate to "Courses > Default settings > Course custom fields" in site administration
 
   Scenario: Create a custom course semester field
-    When I click on "Add a new custom field" "link"
+    When I click on "Add a new category" "button"
+    And I click on "Add field" "link"
     And I click on "Semester field" "link"
     And I set the following fields to these values:
       | Name       | Test field |
@@ -22,12 +23,14 @@ Feature: Managers can manage course custom fields semester
     And I log out
 
   Scenario: Edit a custom course semester field
-    When I click on "Add a new custom field" "link"
+    When I click on "Add a new category" "button"
+    And I click on "Add field" "link"
     And I click on "Semester field" "link"
     And I set the following fields to these values:
       | Name       | Test field |
       | Short name | testfield  |
     And I click on "Save changes" "button" in the "Adding a new Semester field" "dialogue"
+    And I click on "Actions" "link" in the "Test field" "table_row"
     And I click on "Edit" "link" in the "Test field" "table_row"
     And I set the following fields to these values:
       | Name | Edited field |
@@ -37,19 +40,22 @@ Feature: Managers can manage course custom fields semester
     And I log out
 
   Scenario: Delete a custom course semester field
-    When I click on "Add a new custom field" "link"
+    When I click on "Add a new category" "button"
+    And I click on "Add field" "link"
     And I click on "Semester field" "link"
     And I set the following fields to these values:
       | Name       | Test field |
       | Short name | testfield  |
     And I click on "Save changes" "button" in the "Adding a new Semester field" "dialogue"
+    And I click on "Actions" "link" in the "Test field" "table_row"
     And I click on "Delete" "link" in the "Test field" "table_row"
     And I click on "Yes" "button" in the "Confirm" "dialogue"
     Then I should not see "Test field"
     And I log out
 
   Scenario: Validation of custom course select field configuration
-    When I click on "Add a new custom field" "link"
+    When I click on "Add a new category" "button"
+    And I click on "Add field" "link"
     And I click on "Semester field" "link"
     And I set the following fields to these values:
       | Name       | Test field |

@@ -1,6 +1,10 @@
 CHANGELOG
 =========
 
+v5.2-r1 (2026-06-30)
+------------------
+* Moodle 5.2 compatible version
+
 v5.0-r1 (2025-10-27)
 ------------------
 * [FEATURE] Add automated tests

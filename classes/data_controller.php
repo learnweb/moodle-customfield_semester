@@ -42,7 +42,6 @@ use DateTime;
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class data_controller extends \core_customfield\data_controller {
-
     /**
      * Return the name of the field where the information is stored
      *
@@ -80,7 +79,7 @@ class data_controller extends \core_customfield\data_controller {
         }
 
         // Require local library.
-        require_once($CFG->dirroot.'/customfield/field/semester/locallib.php');
+        require_once($CFG->dirroot . '/customfield/field/semester/locallib.php');
 
         // Compose the field values.
         $field = $this->get_field();
@@ -179,8 +178,11 @@ class data_controller extends \core_customfield\data_controller {
             if ($semester === self::get_summerterm_representation()) {
                 return get_string('summersemester', 'customfield_semester', $year);
             } else if ($semester === self::get_winterterm_representation()) {
-                return get_string('wintersemester', 'customfield_semester',
-                        $year . '/' . substr($year + 1, 2, 2));
+                return get_string(
+                    'wintersemester',
+                    'customfield_semester',
+                    $year . '/' . substr($year + 1, 2, 2)
+                );
             } else {
                 return null;
             }
@@ -217,15 +219,17 @@ class data_controller extends \core_customfield\data_controller {
         global $CFG;
 
         // Require local library.
-        require_once($CFG->dirroot.'/customfield/field/semester/locallib.php');
+        require_once($CFG->dirroot . '/customfield/field/semester/locallib.php');
 
         // Get config from DB.
         $config = get_config('customfield_semester');
 
         // Double-check that the value is within the acceptable range. If not, return the default value.
-        if (is_numeric($config->summertermstartmonth) == false ||
+        if (
+            is_numeric($config->summertermstartmonth) == false ||
                 $config->summertermstartmonth < 1 || $config->summertermstartmonth > 12 ||
-                $config->summertermstartmonth > $config->wintertermstartmonth) {
+                $config->summertermstartmonth > $config->wintertermstartmonth
+        ) {
             return CUSTOMFIELD_SEMESTER_SUMMERTERMSTART;
         }
 
@@ -241,15 +245,17 @@ class data_controller extends \core_customfield\data_controller {
         global $CFG;
 
         // Require local library.
-        require_once($CFG->dirroot.'/customfield/field/semester/locallib.php');
+        require_once($CFG->dirroot . '/customfield/field/semester/locallib.php');
 
         // Get config from DB.
         $config = get_config('customfield_semester');
 
         // Double-check that the value is within the acceptable range. If not, return the default value.
-        if (is_numeric($config->wintertermstartmonth) == false ||
+        if (
+            is_numeric($config->wintertermstartmonth) == false ||
                 $config->wintertermstartmonth < 1 || $config->wintertermstartmonth > 12 ||
-                $config->wintertermstartmonth < $config->summertermstartmonth) {
+                $config->wintertermstartmonth < $config->summertermstartmonth
+        ) {
             return CUSTOMFIELD_SEMESTER_WINTERTERMSTART;
         }
 
@@ -270,7 +276,7 @@ class data_controller extends \core_customfield\data_controller {
         // If not already done in a previous call, calculate the return value.
         if ($returnvalue === null) {
             // Require local library.
-            require_once($CFG->dirroot.'/customfield/field/semester/locallib.php');
+            require_once($CFG->dirroot . '/customfield/field/semester/locallib.php');
 
             // Get config from DB.
             $config = get_config('customfield_semester');
@@ -303,7 +309,7 @@ class data_controller extends \core_customfield\data_controller {
         // If not already done in a previous call, calculate the return value.
         if ($returnvalue === null) {
             // Require local library.
-            require_once($CFG->dirroot.'/customfield/field/semester/locallib.php');
+            require_once($CFG->dirroot . '/customfield/field/semester/locallib.php');
 
             // Get config from DB.
             $config = get_config('customfield_semester');
@@ -336,7 +342,7 @@ class data_controller extends \core_customfield\data_controller {
         // If not already done in a previous call, calculate the return value.
         if ($returnvalue === null) {
             // Require local library.
-            require_once($CFG->dirroot.'/customfield/field/semester/locallib.php');
+            require_once($CFG->dirroot . '/customfield/field/semester/locallib.php');
 
             // Return the default representation.
             $returnvalue = CUSTOMFIELD_SEMESTER_INTERNAL_TERMINDEPENDENT;

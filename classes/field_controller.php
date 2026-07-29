@@ -45,28 +45,40 @@ class field_controller extends \core_customfield\field_controller {
     public function config_form_definition(\MoodleQuickForm $mform) {
         $config = $this->get('configdata');
 
-        $mform->addElement('header', 'header_specificsettings',
-                get_string('specificsettings', 'customfield_semester'));
+        $mform->addElement(
+            'header',
+            'header_specificsettings',
+            get_string('specificsettings', 'customfield_semester')
+        );
         $mform->setExpanded('header_specificsettings', true);
 
-        $mform->addElement('text', 'configdata[showmonthsintofuture]',
-                get_string('showmonthsintofuture', 'customfield_semester'));
+        $mform->addElement(
+            'text',
+            'configdata[showmonthsintofuture]',
+            get_string('showmonthsintofuture', 'customfield_semester')
+        );
         $mform->setType('configdata[showmonthsintofuture]', PARAM_INT);
         if (!$config) {
             $mform->setDefault('configdata[showmonthsintofuture]', 6);
         }
         $mform->addRule('configdata[showmonthsintofuture]', null, 'numeric', null, 'client');
 
-        $mform->addElement('text', 'configdata[defaultmonthsintofuture]',
-                get_string('defaultmonthsintofuture', 'customfield_semester'));
+        $mform->addElement(
+            'text',
+            'configdata[defaultmonthsintofuture]',
+            get_string('defaultmonthsintofuture', 'customfield_semester')
+        );
         $mform->setType('configdata[defaultmonthsintofuture]', PARAM_INT);
         if (!$config) {
             $mform->setDefault('configdata[defaultmonthsintofuture]', 3);
         }
         $mform->addRule('configdata[defaultmonthsintofuture]', null, 'numeric', null, 'client');
 
-        $mform->addElement('text', 'configdata[beginofsemesters]',
-                get_string('beginofsemesters', 'customfield_semester'));
+        $mform->addElement(
+            'text',
+            'configdata[beginofsemesters]',
+            get_string('beginofsemesters', 'customfield_semester')
+        );
         $mform->setType('configdata[beginofsemesters]', PARAM_INT);
         if (!$config) {
             $mform->setDefault('configdata[beginofsemesters]', 2007);
@@ -93,7 +105,7 @@ class field_controller extends \core_customfield\field_controller {
         global $CFG;
 
         // Require local library.
-        require_once($CFG->dirroot.'/customfield/field/semester/locallib.php');
+        require_once($CFG->dirroot . '/customfield/field/semester/locallib.php');
 
         // Get config from DB.
         $config = get_config('customfield_semester');

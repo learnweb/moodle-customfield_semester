@@ -33,7 +33,6 @@
  */
 function xmldb_customfield_semester_upgrade($oldversion) {
     if ($oldversion < 2025043000) {
-
         // Make sure that the new admin setting field visibleincoursesettings is initialized with the value 1.
         $config = get_config('customfield_semester');
 
